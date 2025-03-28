@@ -1,5 +1,5 @@
-import { IsUUID, IsInt, Min, Max, IsString, IsOptional } from 'class-validator';
-import { Transform } from 'class-transformer';
+import { IsUUID, IsInt, Min, Max, IsString, IsOptional } from "class-validator";
+import { Transform } from "class-transformer";
 
 export class CreateRatingDto {
   @IsUUID()

@@ -1,5 +1,5 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -8,13 +8,22 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center mb-6">
-              <Image src="/logo.png" alt="Offer Hub Logo" width={40} height={40} className="object-contain" />
+              <Image
+                src="/logo.png"
+                alt="Offer Hub Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
               <span className="font-bold text-xl">OFFER HUB</span>
             </div>
             <p className="opacity-80 mb-6">
-              Connecting talented freelancers with clients worldwide for successful project collaborations.
+              Connecting talented freelancers with clients worldwide for
+              successful project collaborations.
             </p>
-            <div className="flex gap-4">{/* Social media icons would go here */}</div>
+            <div className="flex gap-4">
+              {/* Social media icons would go here */}
+            </div>
           </div>
 
           <div>
@@ -106,6 +115,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
-

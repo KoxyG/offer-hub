@@ -1,34 +1,34 @@
-import { Briefcase, TrendingUp, Users, MessageSquare } from "lucide-react"
-import type { ReactNode } from "react"
+import { Briefcase, TrendingUp, Users, MessageSquare } from "lucide-react";
+import type { ReactNode } from "react";
 
 // Interfaces for data types
 export interface Category {
-  name: string
-  description: string
-  icon: ReactNode
-  link: string
+  name: string;
+  description: string;
+  icon: ReactNode;
+  link: string;
 }
 
 export interface Freelancer {
-  name: string
-  title: string
-  avatar: string
-  rating: number
-  reviews: number
-  hourlyRate: number
-  verified: boolean
+  name: string;
+  title: string;
+  avatar: string;
+  rating: number;
+  reviews: number;
+  hourlyRate: number;
+  verified: boolean;
 }
 
 export interface Step {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
 export interface Testimonial {
-  text: string
-  name: string
-  role: string
-  avatar: string
+  text: string;
+  name: string;
+  role: string;
+  avatar: string;
 }
 
 // Data for categories section
@@ -57,7 +57,7 @@ export const categories: Category[] = [
     icon: <MessageSquare className="h-6 w-6 text-[#15949C]" />,
     link: "/categories/writing",
   },
-]
+];
 
 // Data for freelancers section
 export const freelancers: Freelancer[] = [
@@ -88,23 +88,26 @@ export const freelancers: Freelancer[] = [
     hourlyRate: 40,
     verified: false,
   },
-]
+];
 
 // Data for how it works section
 export const steps: Step[] = [
   {
     title: "Post a Project",
-    description: "Describe your project and the skills you're looking for to find the perfect match.",
+    description:
+      "Describe your project and the skills you're looking for to find the perfect match.",
   },
   {
     title: "Review Proposals",
-    description: "Browse through proposals from talented freelancers and select the best fit.",
+    description:
+      "Browse through proposals from talented freelancers and select the best fit.",
   },
   {
     title: "Collaborate & Pay",
-    description: "Work together seamlessly and release payment when you're satisfied with the results.",
+    description:
+      "Work together seamlessly and release payment when you're satisfied with the results.",
   },
-]
+];
 
 // Data for testimonials section
 export const testimonials: Testimonial[] = [
@@ -126,8 +129,13 @@ export const testimonials: Testimonial[] = [
     role: "Marketing Director",
     avatar: "/person4.png",
   },
-]
+];
 
 // Data for popular tags in hero section
-export const popularTags = ["Web Design", "Logo Design", "Content Writing", "App Development", "Marketing"]
-
+export const popularTags = [
+  "Web Design",
+  "Logo Design",
+  "Content Writing",
+  "App Development",
+  "Marketing",
+];

@@ -32,7 +32,7 @@ export class TransactionsController {
   @Patch("/:transaction_id")
   async update(
     @Param("transaction_id") transaction_id: string,
-    @Body() dto: UpdateTransactionDto
+    @Body() dto: UpdateTransactionDto,
   ) {
     return this.transactionsService.update(transaction_id, dto);
   }

@@ -1,12 +1,18 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from 'typeorm';
-import { ActivityLogs } from '../activity-logs/entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  OneToMany,
+} from "typeorm";
+import { ActivityLogs } from "../activity-logs/entity";
 
-@Entity('users')
+@Entity("users")
 export class User {
-  @PrimaryGeneratedColumn('uuid', { name: 'user_id' })
+  @PrimaryGeneratedColumn("uuid", { name: "user_id" })
   user_id: string;
 
-  @Column({ name: 'wallet_address', length: 100, unique: true })
+  @Column({ name: "wallet_address", length: 100, unique: true })
   wallet_address: string;
 
   @Column({ nullable: true, unique: true })
@@ -15,16 +21,20 @@ export class User {
   @Column({ length: 50, unique: true })
   username: string;
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
+  @CreateDateColumn({ name: "created_at", type: "timestamp with time zone" })
   created_at: Date;
 
-  @Column({ name: 'last_login', type: 'timestamp with time zone', nullable: true })
+  @Column({
+    name: "last_login",
+    type: "timestamp with time zone",
+    nullable: true,
+  })
   last_login: Date;
 
-  @Column({ name: 'is_active', default: true })
+  @Column({ name: "is_active", default: true })
   is_active: boolean;
 
-  @Column({ name: 'two_factor_enabled', default: false })
+  @Column({ name: "two_factor_enabled", default: false })
   two_factor_enabled: boolean;
 
   @OneToMany(() => ActivityLogs, (activityLog) => activityLog.user)

@@ -1,4 +1,4 @@
-import { IsOptional, IsString, IsUUID, IsDate } from 'class-validator';
+import { IsOptional, IsString, IsUUID, IsDate } from "class-validator";
 
 export class CreateCertificationDto {
   @IsUUID()
@@ -45,5 +45,5 @@ export class UpdateCertificationDto {
 
   @IsOptional()
   @IsString()
-  verification_status?: 'pending' | 'verified' | 'rejected';
+  verification_status?: "pending" | "verified" | "rejected";
 }

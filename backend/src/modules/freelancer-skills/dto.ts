@@ -1,4 +1,4 @@
-import { IsUUID, IsString } from 'class-validator';
+import { IsUUID, IsString } from "class-validator";
 
 export class CreateFreelancerSkillDto {
   @IsUUID()
@@ -8,10 +8,10 @@ export class CreateFreelancerSkillDto {
   skill_id: string;
 
   @IsString()
-  experience_level: 'beginner' | 'intermediate' | 'expert';
+  experience_level: "beginner" | "intermediate" | "expert";
 }
 
 export class UpdateFreelancerSkillDto {
   @IsString()
-  experience_level?: 'beginner' | 'intermediate' | 'expert';
+  experience_level?: "beginner" | "intermediate" | "expert";
 }

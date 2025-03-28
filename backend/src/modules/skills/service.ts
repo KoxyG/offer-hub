@@ -9,7 +9,8 @@ import { Category } from "../categories/entity";
 export class SkillService {
   constructor(
     @InjectRepository(Skill) private readonly repo: Repository<Skill>,
-    @InjectRepository(Category) private readonly categoryRepo: Repository<Category>
+    @InjectRepository(Category)
+    private readonly categoryRepo: Repository<Category>,
   ) {}
 
   async findAll(): Promise<Skill[]> {
@@ -17,9 +18,13 @@ export class SkillService {
   }
 
   async create(dto: CreateSkillDto): Promise<Skill> {
-    const category = await this.categoryRepo.findOne({ where: { category_id: dto.category_id } });
+    const category = await this.categoryRepo.findOne({
+      where: { category_id: dto.category_id },
+    });
     if (!category) {
-      throw new NotFoundException(`Category with ID ${dto.category_id} not found.`);
+      throw new NotFoundException(
+        `Category with ID ${dto.category_id} not found.`,
+      );
     }
 
     const skill = this.repo.create({ ...dto, category });
@@ -27,7 +32,10 @@ export class SkillService {
   }
 
   async findById(id: string): Promise<Skill> {
-    const skill = await this.repo.findOne({ where: { skill_id: id }, relations: ["category"] });
+    const skill = await this.repo.findOne({
+      where: { skill_id: id },
+      relations: ["category"],
+    });
     if (!skill) throw new NotFoundException(`Skill with ID ${id} not found.`);
     return skill;
   }
@@ -40,6 +48,7 @@ export class SkillService {
 
   async remove(id: string): Promise<void> {
     const result = await this.repo.delete(id);
-    if (result.affected === 0) throw new NotFoundException(`Skill with ID ${id} not found.`);
+    if (result.affected === 0)
+      throw new NotFoundException(`Skill with ID ${id} not found.`);
   }
 }

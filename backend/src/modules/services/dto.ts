@@ -1,4 +1,12 @@
-import { IsUUID, IsString, IsNumber, IsBoolean, Min, MaxLength, IsOptional } from 'class-validator';
+import {
+  IsUUID,
+  IsString,
+  IsNumber,
+  IsBoolean,
+  Min,
+  MaxLength,
+  IsOptional,
+} from "class-validator";
 
 export class CreateServiceDto {
   @IsUUID()

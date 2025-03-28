@@ -1,17 +1,21 @@
-import { Star } from "lucide-react"
+import { Star } from "lucide-react";
 
 interface StarRatingProps {
-  rating: number
-  maxRating?: number
-  size?: "sm" | "md" | "lg"
+  rating: number;
+  maxRating?: number;
+  size?: "sm" | "md" | "lg";
 }
 
-export default function StarRating({ rating, maxRating = 5, size = "md" }: StarRatingProps) {
+export default function StarRating({
+  rating,
+  maxRating = 5,
+  size = "md",
+}: StarRatingProps) {
   const sizeClass = {
     sm: "h-3 w-3",
     md: "h-4 w-4",
     lg: "h-5 w-5",
-  }[size]
+  }[size];
 
   return (
     <div className="flex">
@@ -25,6 +29,5 @@ export default function StarRating({ rating, maxRating = 5, size = "md" }: StarR
           />
         ))}
     </div>
-  )
+  );
 }
-

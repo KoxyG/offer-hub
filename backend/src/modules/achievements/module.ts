@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AchievementsController } from './controller';
-import { AchievementsService } from './service';
-import { Achievement } from './entity';
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { AchievementsController } from "./controller";
+import { AchievementsService } from "./service";
+import { Achievement } from "./entity";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Achievement])],

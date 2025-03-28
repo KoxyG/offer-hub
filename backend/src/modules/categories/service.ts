@@ -1,12 +1,14 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Category } from './entity';
-import { CreateCategoryDto, UpdateCategoryDto } from './dto';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Category } from "./entity";
+import { CreateCategoryDto, UpdateCategoryDto } from "./dto";
 
 @Injectable()
 export class CategoriesService {
-  constructor(@InjectRepository(Category) private readonly repo: Repository<Category>) {}
+  constructor(
+    @InjectRepository(Category) private readonly repo: Repository<Category>,
+  ) {}
 
   async create(dto: CreateCategoryDto): Promise<Category> {
     const category = this.repo.create(dto);
@@ -14,18 +16,26 @@ export class CategoriesService {
   }
 
   async findAll(): Promise<Category[]> {
-    return this.repo.find({ relations: ['parent_category'] });
+    return this.repo.find({ relations: ["parent_category"] });
   }
 
   async findById(id: string): Promise<Category> {
-    const category = await this.repo.findOne({ where: { category_id: id }, relations: ['parent_category'] });
-    if (!category) throw new NotFoundException(`Category with ID ${id} not found.`);
+    const category = await this.repo.findOne({
+      where: { category_id: id },
+      relations: ["parent_category"],
+    });
+    if (!category)
+      throw new NotFoundException(`Category with ID ${id} not found.`);
     return category;
   }
 
   async findBySlug(slug: string): Promise<Category> {
-    const category = await this.repo.findOne({ where: { slug }, relations: ['parent_category'] });
-    if (!category) throw new NotFoundException(`Category with slug ${slug} not found.`);
+    const category = await this.repo.findOne({
+      where: { slug },
+      relations: ["parent_category"],
+    });
+    if (!category)
+      throw new NotFoundException(`Category with slug ${slug} not found.`);
     return category;
   }
 
@@ -37,6 +47,7 @@ export class CategoriesService {
 
   async delete(id: string): Promise<void> {
     const result = await this.repo.delete(id);
-    if (result.affected === 0) throw new NotFoundException(`Category with ID ${id} not found.`);
+    if (result.affected === 0)
+      throw new NotFoundException(`Category with ID ${id} not found.`);
   }
 }

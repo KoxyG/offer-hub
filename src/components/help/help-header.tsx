@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,7 +11,10 @@ export default function HelpHeader() {
             OFFER HUB
           </span>
         </div>
-        <Link href="/" className="text-sm text-blue-700 hover:underline flex items-center gap-1">
+        <Link
+          href="/"
+          className="text-sm text-blue-700 hover:underline flex items-center gap-1"
+        >
           <span className="text-lg">←</span>
           Back to Home
         </Link>

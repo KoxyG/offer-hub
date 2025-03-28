@@ -1,9 +1,18 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, HttpCode } from '@nestjs/common';
-import { CertificationsService } from './service';
-import { CreateCertificationDto, UpdateCertificationDto } from './dto';
-import { Certification } from './entity';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  Delete,
+  HttpCode,
+} from "@nestjs/common";
+import { CertificationsService } from "./service";
+import { CreateCertificationDto, UpdateCertificationDto } from "./dto";
+import { Certification } from "./entity";
 
-@Controller('certifications')
+@Controller("certifications")
 export class CertificationsController {
   constructor(private readonly certificationsService: CertificationsService) {}
 
@@ -17,19 +26,22 @@ export class CertificationsController {
     return this.certificationsService.create(dto);
   }
 
-  @Get(':id')
-  async getById(@Param('id') id: string): Promise<Certification> {
+  @Get(":id")
+  async getById(@Param("id") id: string): Promise<Certification> {
     return this.certificationsService.findById(id);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: UpdateCertificationDto): Promise<Certification> {
+  @Put(":id")
+  async update(
+    @Param("id") id: string,
+    @Body() dto: UpdateCertificationDto,
+  ): Promise<Certification> {
     return this.certificationsService.update(id, dto);
   }
 
-  @Delete(':id')
+  @Delete(":id")
   @HttpCode(204)
-  async delete(@Param('id') id: string): Promise<void> {
+  async delete(@Param("id") id: string): Promise<void> {
     return this.certificationsService.delete(id);
   }
 }

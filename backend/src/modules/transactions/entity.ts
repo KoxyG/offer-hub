@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+} from "typeorm";
 import { User } from "../users/entity";
 import { Project } from "../projects/entity";
 
@@ -6,14 +13,14 @@ export enum TransactionStatus {
   PENDING = "pending",
   COMPLETED = "completed",
   FAILED = "failed",
-  CANCELLED = "cancelled"
+  CANCELLED = "cancelled",
 }
 
 export enum TransactionType {
   PAYMENT = "payment",
   ESCROW_DEPOSIT = "escrow_deposit",
   ESCROW_RELEASE = "escrow_release",
-  REFUND = "refund"
+  REFUND = "refund",
 }
 
 @Entity("transactions")
@@ -42,13 +49,20 @@ export class Transaction {
   @Column({ type: "varchar", length: 100, unique: true, nullable: false })
   transaction_hash: string;
 
-  @Column({ type: "enum", enum: TransactionStatus, default: TransactionStatus.PENDING })
+  @Column({
+    type: "enum",
+    enum: TransactionStatus,
+    default: TransactionStatus.PENDING,
+  })
   status: TransactionStatus;
 
   @Column({ type: "enum", enum: TransactionType })
   type: TransactionType;
 
-  @CreateDateColumn({ type: "timestamp with time zone", default: () => "CURRENT_TIMESTAMP" })
+  @CreateDateColumn({
+    type: "timestamp with time zone",
+    default: () => "CURRENT_TIMESTAMP",
+  })
   created_at: Date;
 
   @Column({ type: "timestamp with time zone", nullable: true })

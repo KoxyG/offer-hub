@@ -1,20 +1,20 @@
-import { Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Service } from '../services/entity';
-import { Category } from '../categories/entity';
+import { Entity, PrimaryColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Service } from "../services/entity";
+import { Category } from "../categories/entity";
 
-@Entity({ name: 'service_categories' })
+@Entity({ name: "service_categories" })
 export class ServiceCategory {
-  @PrimaryColumn('uuid')
+  @PrimaryColumn("uuid")
   service_id: string;
 
-  @PrimaryColumn('uuid')
+  @PrimaryColumn("uuid")
   category_id: string;
 
-  @ManyToOne(() => Service, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'service_id' })
+  @ManyToOne(() => Service, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "service_id" })
   service: Service;
 
-  @ManyToOne(() => Category, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'category_id' })
+  @ManyToOne(() => Category, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "category_id" })
   category: Category;
 }

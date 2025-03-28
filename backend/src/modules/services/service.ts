@@ -28,17 +28,24 @@ export class ServicesService {
   }
 
   async findAll(): Promise<Service[]> {
-    return this.repo.find({ relations: ['freelancer'] });
+    return this.repo.find({ relations: ["freelancer"] });
   }
 
   async findById(id: string): Promise<Service> {
-    const service = await this.repo.findOne({ where: { service_id: id }, relations: ['freelancer'] });
-    if (!service) throw new NotFoundException(`Service with ID ${id} not found.`);
+    const service = await this.repo.findOne({
+      where: { service_id: id },
+      relations: ["freelancer"],
+    });
+    if (!service)
+      throw new NotFoundException(`Service with ID ${id} not found.`);
     return service;
   }
 
   async findByFreelancer(freelancerId: string): Promise<Service[]> {
-    return this.repo.find({ where: { freelancer_id: freelancerId }, relations: ['freelancer'] });
+    return this.repo.find({
+      where: { freelancer_id: freelancerId },
+      relations: ["freelancer"],
+    });
   }
 
   async update(id: string, dto: UpdateServiceDto): Promise<Service> {
@@ -49,6 +56,7 @@ export class ServicesService {
 
   async delete(id: string): Promise<void> {
     const result = await this.repo.delete(id);
-    if (result.affected === 0) throw new NotFoundException(`Service with ID ${id} not found.`);
+    if (result.affected === 0)
+      throw new NotFoundException(`Service with ID ${id} not found.`);
   }
 }

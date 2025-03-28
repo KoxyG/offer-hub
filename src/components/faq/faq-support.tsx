@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 export function FaqSupport() {
   return (
@@ -12,9 +12,12 @@ export function FaqSupport() {
     >
       <div className="bg-gradient-to-r from-[#002333] to-[#159A9C] p-8 md:p-12 text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Still Have Questions?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            Still Have Questions?
+          </h2>
           <p className="text-white/80 mb-8">
-            If you couldn&apos;t find the answer to your question, our support team is here to help.
+            If you couldn&apos;t find the answer to your question, our support
+            team is here to help.
           </p>
 
           <motion.button
@@ -34,6 +37,5 @@ export function FaqSupport() {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
-

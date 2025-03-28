@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany, ManyToOne } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  OneToMany,
+  ManyToOne,
+} from "typeorm";
 import { FreelancerSkill } from "../freelancer-skills/entity";
 import { Category } from "../categories/entity";
 

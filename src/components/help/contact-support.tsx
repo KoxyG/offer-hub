@@ -1,4 +1,3 @@
-
 import { MdEmail, MdPhone, MdChat } from "react-icons/md";
 
 const supportOptions = [
@@ -46,7 +45,9 @@ export default function ContactSupport() {
               <div className="bg-teal-50 p-3 rounded-full mb-4">
                 {option.icon}
               </div>
-              <h3 className="font-semibold text-lg text-gray-900 mb-1">{option.title}</h3>
+              <h3 className="font-semibold text-lg text-gray-900 mb-1">
+                {option.title}
+              </h3>
               <p className="text-sm text-gray-600 mb-4">{option.description}</p>
               <a
                 href={option.href}

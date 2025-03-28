@@ -31,7 +31,7 @@ export class DisputesController {
 
   @Get(":id")
   async getDisputeById(
-    @Param("id", ParseUUIDPipe) id: string
+    @Param("id", ParseUUIDPipe) id: string,
   ): Promise<DisputeEntity> {
     return this.disputesService.getDisputeById(id);
   }
@@ -39,7 +39,7 @@ export class DisputesController {
   @Put(":id/resolve")
   async updateDispute(
     @Param("id", ParseUUIDPipe) id: string,
-    @Body(ValidationPipe) dto: UpdateDisputeDto
+    @Body(ValidationPipe) dto: UpdateDisputeDto,
   ): Promise<DisputeEntity> {
     return this.disputesService.updateDispute(id, dto);
   }

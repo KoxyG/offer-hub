@@ -1,14 +1,26 @@
-import { Controller, Get, Post, Delete, Body, Param, HttpCode } from '@nestjs/common';
-import { ConversationParticipantsService } from './service';
-import { CreateConversationParticipantDto } from './dto';
-import { ConversationParticipant } from './entity';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Body,
+  Param,
+  HttpCode,
+} from "@nestjs/common";
+import { ConversationParticipantsService } from "./service";
+import { CreateConversationParticipantDto } from "./dto";
+import { ConversationParticipant } from "./entity";
 
-@Controller('conversation-participants')
+@Controller("conversation-participants")
 export class ConversationParticipantsController {
-  constructor(private readonly conversationParticipantsService: ConversationParticipantsService) {}
+  constructor(
+    private readonly conversationParticipantsService: ConversationParticipantsService,
+  ) {}
 
   @Post()
-  async create(@Body() dto: CreateConversationParticipantDto): Promise<ConversationParticipant> {
+  async create(
+    @Body() dto: CreateConversationParticipantDto,
+  ): Promise<ConversationParticipant> {
     return this.conversationParticipantsService.create(dto);
   }
 
@@ -17,14 +29,21 @@ export class ConversationParticipantsController {
     return this.conversationParticipantsService.findAll();
   }
 
-  @Get(':conversationId')
-  async findByConversation(@Param('conversationId') conversationId: string): Promise<ConversationParticipant[]> {
-    return this.conversationParticipantsService.findByConversation(conversationId);
+  @Get(":conversationId")
+  async findByConversation(
+    @Param("conversationId") conversationId: string,
+  ): Promise<ConversationParticipant[]> {
+    return this.conversationParticipantsService.findByConversation(
+      conversationId,
+    );
   }
 
-  @Delete(':conversationId/:userId')
+  @Delete(":conversationId/:userId")
   @HttpCode(204)
-  async remove(@Param('conversationId') conversationId: string, @Param('userId') userId: string): Promise<void> {
+  async remove(
+    @Param("conversationId") conversationId: string,
+    @Param("userId") userId: string,
+  ): Promise<void> {
     return this.conversationParticipantsService.delete(conversationId, userId);
   }
 }

@@ -1,9 +1,18 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, HttpCode } from '@nestjs/common';
-import { AchievementsService } from './service';
-import { CreateAchievementDto, UpdateAchievementDto } from './dto';
-import { Achievement } from './entity';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  Delete,
+  HttpCode,
+} from "@nestjs/common";
+import { AchievementsService } from "./service";
+import { CreateAchievementDto, UpdateAchievementDto } from "./dto";
+import { Achievement } from "./entity";
 
-@Controller('achievements')
+@Controller("achievements")
 export class AchievementsController {
   constructor(private readonly achievementsService: AchievementsService) {}
 
@@ -17,19 +26,22 @@ export class AchievementsController {
     return this.achievementsService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Achievement> {
+  @Get(":id")
+  async findOne(@Param("id") id: string): Promise<Achievement> {
     return this.achievementsService.findById(id);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: UpdateAchievementDto): Promise<Achievement> {
+  @Put(":id")
+  async update(
+    @Param("id") id: string,
+    @Body() dto: UpdateAchievementDto,
+  ): Promise<Achievement> {
     return this.achievementsService.update(id, dto);
   }
 
-  @Delete(':id')
+  @Delete(":id")
   @HttpCode(204)
-  async delete(@Param('id') id: string): Promise<void> {
+  async delete(@Param("id") id: string): Promise<void> {
     return this.achievementsService.delete(id);
   }
 }

@@ -1,12 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CreateConversationDto, UpdateConversationDto } from './dto';
-import { Conversation } from './entity';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { CreateConversationDto, UpdateConversationDto } from "./dto";
+import { Conversation } from "./entity";
 
 @Injectable()
 export class ConversationsService {
-  constructor(@InjectRepository(Conversation) private readonly repo: Repository<Conversation>) {}
+  constructor(
+    @InjectRepository(Conversation)
+    private readonly repo: Repository<Conversation>,
+  ) {}
 
   async findAll(): Promise<Conversation[]> {
     return this.repo.find();
@@ -18,8 +21,11 @@ export class ConversationsService {
   }
 
   async findById(id: string): Promise<Conversation> {
-    const conversation = await this.repo.findOne({ where: { conversationId: id } });
-    if (!conversation) throw new NotFoundException(`Conversation with ID ${id} not found.`);
+    const conversation = await this.repo.findOne({
+      where: { conversationId: id },
+    });
+    if (!conversation)
+      throw new NotFoundException(`Conversation with ID ${id} not found.`);
     return conversation;
   }
 
@@ -32,6 +38,7 @@ export class ConversationsService {
 
   async delete(id: string): Promise<void> {
     const result = await this.repo.delete(id);
-    if (result.affected === 0) throw new NotFoundException(`Conversation with ID ${id} not found.`);
+    if (result.affected === 0)
+      throw new NotFoundException(`Conversation with ID ${id} not found.`);
   }
 }

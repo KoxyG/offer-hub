@@ -1,4 +1,10 @@
-import { IsUUID, IsString, IsOptional, IsBoolean, IsArray } from 'class-validator';
+import {
+  IsUUID,
+  IsString,
+  IsOptional,
+  IsBoolean,
+  IsArray,
+} from "class-validator";
 
 export class CreatePortfolioItemDto {
   @IsUUID()

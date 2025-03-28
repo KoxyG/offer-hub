@@ -9,7 +9,7 @@ import { User } from "../users/entity";
 export class ProjectsService {
   constructor(
     @InjectRepository(Project) private readonly repo: Repository<Project>,
-    @InjectRepository(User) private readonly userRepo: Repository<User>
+    @InjectRepository(User) private readonly userRepo: Repository<User>,
   ) {}
 
   async findAll(): Promise<Project[]> {
@@ -17,16 +17,23 @@ export class ProjectsService {
   }
 
   async create(dto: CreateProjectDto): Promise<Project> {
-    const client = await this.userRepo.findOne({ where: { user_id: dto.client_id } });
-    if (!client) throw new NotFoundException(`User with ID ${dto.client_id} not found.`);
+    const client = await this.userRepo.findOne({
+      where: { user_id: dto.client_id },
+    });
+    if (!client)
+      throw new NotFoundException(`User with ID ${dto.client_id} not found.`);
 
     const project = this.repo.create({ ...dto, client });
     return this.repo.save(project);
   }
 
   async findById(project_id: string): Promise<Project> {
-    const project = await this.repo.findOne({ where: { project_id }, relations: ["client"] });
-    if (!project) throw new NotFoundException(`Project with ID ${project_id} not found.`);
+    const project = await this.repo.findOne({
+      where: { project_id },
+      relations: ["client"],
+    });
+    if (!project)
+      throw new NotFoundException(`Project with ID ${project_id} not found.`);
     return project;
   }
 
@@ -38,7 +45,8 @@ export class ProjectsService {
 
   async delete(project_id: string): Promise<void> {
     const result = await this.repo.delete(project_id);
-    if (result.affected === 0) throw new NotFoundException(`Project with ID ${project_id} not found.`);
+    if (result.affected === 0)
+      throw new NotFoundException(`Project with ID ${project_id} not found.`);
   }
 
   async countProjectsByStatus(status: ProjectStatus): Promise<number> {

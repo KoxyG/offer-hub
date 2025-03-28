@@ -1,10 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { FaqCategories } from "./faq-categories"
-import { FaqAccordion } from "./faq-accordion"
-import { FaqSupport } from "./faq-support"
-import { HelpCircle, CreditCard, Users, Briefcase, Shield, Settings } from "lucide-react"
+import { useState } from "react";
+import { FaqCategories } from "./faq-categories";
+import { FaqAccordion } from "./faq-accordion";
+import { FaqSupport } from "./faq-support";
+import {
+  HelpCircle,
+  CreditCard,
+  Users,
+  Briefcase,
+  Shield,
+  Settings,
+} from "lucide-react";
 
 // FAQ data structure
 const faqData = {
@@ -110,23 +117,30 @@ const faqData = {
         "Payment terms vary by project. For fixed-price projects, funds are released upon milestone completion. For hourly projects, payments are processed weekly based on tracked hours.",
     },
   ],
-}
+};
 
 export default function FaqContainer() {
-  const [activeCategory, setActiveCategory] = useState("General Questions")
+  const [activeCategory, setActiveCategory] = useState("General Questions");
 
-  const categories = Object.keys(faqData)
+  const categories = Object.keys(faqData);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
       <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-secondary-500 mb-4">Frequently Asked Questions</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-secondary-500 mb-4">
+          Frequently Asked Questions
+        </h1>
         <p className="text-[#7a8a9a] max-w-2xl mx-auto">
-          Find answers to the most common questions about Offer Hub and how our platform works.
+          Find answers to the most common questions about Offer Hub and how our
+          platform works.
         </p>
       </div>
 
-      <FaqCategories categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+      <FaqCategories
+        categories={categories}
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
+      />
 
       <div className="mt-12">
         <div className="flex items-center gap-3 mb-6">
@@ -160,7 +174,9 @@ export default function FaqContainer() {
               <Settings size={20} className="text-primary-500" />
             </div>
           )}
-          <h2 className="text-2xl font-bold text-secondary-500">{activeCategory}</h2>
+          <h2 className="text-2xl font-bold text-secondary-500">
+            {activeCategory}
+          </h2>
         </div>
 
         <FaqAccordion faqs={faqData[activeCategory as keyof typeof faqData]} />
@@ -168,6 +184,5 @@ export default function FaqContainer() {
 
       <FaqSupport />
     </div>
-  )
+  );
 }
-

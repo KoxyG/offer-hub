@@ -1,4 +1,4 @@
-import { steps } from "@/data/landing-data"
+import { steps } from "@/data/landing-data";
 
 export default function HowItWorksSection() {
   return (
@@ -7,7 +7,8 @@ export default function HowItWorksSection() {
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold mb-4">How Offer Hub Works</h2>
           <p className="max-w-2xl mx-auto opacity-80">
-            Simple steps to find the perfect freelancer or get hired for your skills
+            Simple steps to find the perfect freelancer or get hired for your
+            skills
           </p>
         </div>
 
@@ -24,6 +25,5 @@ export default function HowItWorksSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

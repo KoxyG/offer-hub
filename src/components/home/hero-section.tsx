@@ -1,9 +1,9 @@
-import Image from "next/image"
-import { Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { popularTags } from "@/data/landing-data"
+import Image from "next/image";
+import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { popularTags } from "@/data/landing-data";
 
 export default function HeroSection() {
   return (
@@ -28,7 +28,10 @@ export default function HeroSection() {
           </div>
           <div className="flex flex-wrap gap-2">
             {popularTags.map((tag, index) => (
-              <Badge key={index} className="bg-white/20 hover:bg-white/30 text-white">
+              <Badge
+                key={index}
+                className="bg-white/20 hover:bg-white/30 text-white"
+              >
                 {tag}
               </Badge>
             ))}
@@ -49,6 +52,5 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

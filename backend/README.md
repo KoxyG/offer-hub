@@ -15,18 +15,22 @@ Backend for **OFFER-HUB**, a blockchain-based freelance services platform using 
 ## ⚡ **Setup & Installation**
 
 ### 1️⃣ **Clone the repository**
+
 ```sh
-git clone https://github.com/user/offer-hub.git  
-cd offer-hub/backend  
+git clone https://github.com/user/offer-hub.git
+cd offer-hub/backend
 ```
 
 ### 2️⃣ **Install dependencies**
+
 ```sh
-npm install  
+npm install
 ```
 
 ### 3️⃣ **Set up environment variables**
+
 Create a `.env` file in `backend/` with:
+
 ```typescript
 DATABASE_HOST=offer_hub_database
 DATABASE_PORT=5432
@@ -45,23 +49,26 @@ WEBHOOK_SECRET=secret//Secret webhook must be incororpored to do test local
 ## 🛠 **Starting Backend & Database**
 
 ### 1️⃣ **Start Database, Hasura & Backend**
+
 ```sh
 docker compose up --build
 ```
 
 ### 2️⃣ **Verify Database**
+
 ```sh
-docker logs offer_hub_database  
+docker logs offer_hub_database
 ```
+
 ---
 
 ## ✅ **Useful Commands**
 
-| Command                     | Description                     |
-|-----------------------------|---------------------------------|
-| `npm install`               | Install dependencies            |
-| `docker compose up --build`      | Start database, Hasura & Backend   |
-| `docker logs offer_hub_database` | Check database logs        |
+| Command                          | Description                      |
+| -------------------------------- | -------------------------------- |
+| `npm install`                    | Install dependencies             |
+| `docker compose up --build`      | Start database, Hasura & Backend |
+| `docker logs offer_hub_database` | Check database logs              |
 
 ---
 

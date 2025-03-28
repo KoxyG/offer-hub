@@ -1,5 +1,3 @@
-
-
 import Image from "next/image";
 import { FiExternalLink } from "react-icons/fi";
 
@@ -9,7 +7,7 @@ const resources = [
     description:
       "Connect with other freelancers and clients, share experiences, and get advice from the Offer Hub community.",
     href: "#",
-    image: "/community-placeholder.png", 
+    image: "/community-placeholder.png",
   },
   {
     title: "Freelancer Blog",
@@ -24,9 +22,15 @@ const resources = [
 export default function CommunityResources() {
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
-      <h2 className="text-2xl font-bold text-center mb-2">Community & Resources</h2>
+      <h2 className="text-2xl font-bold text-center mb-2">
+        Community & Resources
+      </h2>
       <p className="text-center text-gray-600 mb-10">
-        Join our <a href="#" className="text-teal-600 font-medium hover:underline">community</a> and access additional resources to enhance your experience
+        Join our{" "}
+        <a href="#" className="text-teal-600 font-medium hover:underline">
+          community
+        </a>{" "}
+        and access additional resources to enhance your experience
       </p>
 
       <div className="grid sm:grid-cols-2 gap-6">

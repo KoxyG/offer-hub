@@ -79,7 +79,7 @@ export class DisputesService {
 
   async updateDispute(
     id: string,
-    dto: UpdateDisputeDto
+    dto: UpdateDisputeDto,
   ): Promise<DisputeEntity> {
     const dispute = await this.getDisputeById(id);
 

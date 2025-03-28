@@ -1,4 +1,4 @@
-import { IsUUID, IsString, IsBoolean, IsOptional } from 'class-validator';
+import { IsUUID, IsString, IsBoolean, IsOptional } from "class-validator";
 
 export class CreateNotificationDto {
   @IsUUID()

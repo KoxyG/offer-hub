@@ -1,13 +1,13 @@
-import { Module, forwardRef } from '@nestjs/common';
-import { InvoiceService } from './service';
-import { PdfModule } from '../pdf/module';
-import { TransactionsModule } from '../transactions/module';
-import { UsersModule } from '../users/module';
-import { ProjectsModule } from '../projects/module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Transaction } from '../transactions/entity';
-import { InvoiceController } from './controller';
-import { StorageModule } from '../storage/module';
+import { Module, forwardRef } from "@nestjs/common";
+import { InvoiceService } from "./service";
+import { PdfModule } from "../pdf/module";
+import { TransactionsModule } from "../transactions/module";
+import { UsersModule } from "../users/module";
+import { ProjectsModule } from "../projects/module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { Transaction } from "../transactions/entity";
+import { InvoiceController } from "./controller";
+import { StorageModule } from "../storage/module";
 
 @Module({
   imports: [
@@ -16,7 +16,7 @@ import { StorageModule } from '../storage/module';
     forwardRef(() => TransactionsModule),
     UsersModule,
     ProjectsModule,
-    StorageModule
+    StorageModule,
   ],
   controllers: [InvoiceController],
   providers: [InvoiceService],

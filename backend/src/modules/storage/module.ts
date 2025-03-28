@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { StorageService } from './service';
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { StorageService } from "./service";
 
 @Module({
   imports: [ConfigModule],

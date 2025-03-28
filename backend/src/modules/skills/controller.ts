@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Patch } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Patch,
+} from "@nestjs/common";
 import { SkillService } from "./service";
 import { CreateSkillDto, UpdateSkillDto } from "./dto";
 

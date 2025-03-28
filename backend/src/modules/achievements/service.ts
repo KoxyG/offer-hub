@@ -1,12 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CreateAchievementDto, UpdateAchievementDto } from './dto';
-import { Achievement } from './entity';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { CreateAchievementDto, UpdateAchievementDto } from "./dto";
+import { Achievement } from "./entity";
 
 @Injectable()
 export class AchievementsService {
-  constructor(@InjectRepository(Achievement) private readonly repo: Repository<Achievement>) {}
+  constructor(
+    @InjectRepository(Achievement)
+    private readonly repo: Repository<Achievement>,
+  ) {}
 
   async create(dto: CreateAchievementDto): Promise<Achievement> {
     const achievement = this.repo.create(dto);
@@ -18,8 +21,11 @@ export class AchievementsService {
   }
 
   async findById(id: string): Promise<Achievement> {
-    const achievement = await this.repo.findOne({ where: { achievement_id: id } });
-    if (!achievement) throw new NotFoundException(`Achievement with ID ${id} not found.`);
+    const achievement = await this.repo.findOne({
+      where: { achievement_id: id },
+    });
+    if (!achievement)
+      throw new NotFoundException(`Achievement with ID ${id} not found.`);
     return achievement;
   }
 
@@ -31,6 +37,7 @@ export class AchievementsService {
 
   async delete(id: string): Promise<void> {
     const result = await this.repo.delete(id);
-    if (result.affected === 0) throw new NotFoundException(`Achievement with ID ${id} not found.`);
+    if (result.affected === 0)
+      throw new NotFoundException(`Achievement with ID ${id} not found.`);
   }
 }

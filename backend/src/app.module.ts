@@ -55,10 +55,10 @@ import { AchievementsModule } from "./modules/achievements/module";
 import { ServicesModule } from "./modules/services/module";
 import { ServiceCategoriesModule } from "./modules/service-categories/module";
 import { DisputesModule } from "./modules/disputes/disputes.module";
+import { InvoiceModule } from "./modules/invoices/module";
 import { VerificationsModule } from "./modules/verification/verification.module";
 import { InvoiceModule } from './modules/invoices/module';
 import { WebhooksModule } from "./modules/webhooks/module";
-
 
 @Module({
   imports: [

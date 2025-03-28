@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ChevronUp, ChevronDown } from "lucide-react"
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 interface Faq {
-  question: string
-  answer: string
+  question: string;
+  answer: string;
 }
 
 interface FaqAccordionProps {
-  faqs: Faq[]
+  faqs: Faq[];
 }
 
 export function FaqAccordion({ faqs }: FaqAccordionProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFaq = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
     <div className="space-y-4">
@@ -41,9 +41,15 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
             className="w-full flex items-center justify-between p-4 text-left"
             aria-expanded={openIndex === index}
           >
-            <span className="font-medium text-secondary-500">{faq.question}</span>
+            <span className="font-medium text-secondary-500">
+              {faq.question}
+            </span>
             <div className="text-primary-500 flex-shrink-0 ml-2">
-              {openIndex === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+              {openIndex === index ? (
+                <ChevronUp size={20} />
+              ) : (
+                <ChevronDown size={20} />
+              )}
             </div>
           </button>
 
@@ -78,13 +84,14 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
                 }}
                 className="overflow-hidden"
               >
-                <div className="px-4 py-6 text-[#7a8a9a] leading-relaxed border-t border-[#e4e4e4]">{faq.answer}</div>
+                <div className="px-4 py-6 text-[#7a8a9a] leading-relaxed border-t border-[#e4e4e4]">
+                  {faq.answer}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
         </motion.div>
       ))}
     </div>
-  )
+  );
 }
-

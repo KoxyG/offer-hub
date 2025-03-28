@@ -1,3 +1,8 @@
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { ServicesController } from "./controller";
+import { ServicesService } from "./service";
+import { Service } from "./entity";
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServicesController } from './controller';
