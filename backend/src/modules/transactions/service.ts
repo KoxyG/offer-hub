@@ -1,21 +1,25 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { forwardRef, Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { CreateTransactionDto, UpdateTransactionDto } from "./dto";
 import { Transaction, TransactionStatus, TransactionType } from "./entity";
 import { User } from "../users/entity";
 import { Project } from "../projects/entity";
+import { InvoiceService } from "../invoices/service";
 import { DisputeEntity } from "../disputes/disputes.entity";
 import { DisputeStatus } from "../disputes/disputes.dto";
+import { WebhooksService } from "../webhooks/service";
+import { WebhookEvent } from "../webhooks/entity";
 
 @Injectable()
 export class TransactionsService {
   constructor(
     @InjectRepository(Transaction)
     private readonly repo: Repository<Transaction>,
+    private readonly webhooksService: WebhooksService,
     @InjectRepository(User) private readonly userRepo: Repository<User>,
-    @InjectRepository(Project)
-    private readonly projectRepo: Repository<Project>,
+    @InjectRepository(Project) private readonly projectRepo: Repository<Project>,
+    @Inject(forwardRef(() => InvoiceService)) private readonly invoiceService: InvoiceService,
     @InjectRepository(DisputeEntity)
     private readonly disputerepo: Repository<DisputeEntity>
   ) {}
@@ -58,7 +62,40 @@ export class TransactionsService {
         dto.status === TransactionStatus.COMPLETED ? new Date() : undefined,
     });
 
-    return this.repo.save(transaction);
+    const savedTransaction = await this.repo.save(transaction);
+    //Trigger webhook
+    if (savedTransaction.status === TransactionStatus.COMPLETED) { 
+    
+      const webhookData = {
+        event: WebhookEvent.PAYMENT_COMPLETED, 
+        data: {  
+          savedTransaction
+        }
+      };
+      
+      await this.webhooksService.triggerWebhook(webhookData);
+    }
+
+    if (savedTransaction.status === TransactionStatus.COMPLETED && 
+      (savedTransaction.type === TransactionType.PAYMENT || 
+        savedTransaction.type === TransactionType.ESCROW_RELEASE)) {
+      try {
+        const invoicePath = await this.invoiceService.generateInvoiceForTransaction(savedTransaction.transaction_id);
+        
+        // Save the reference to the PDF in the database
+        // For this, we would need to add an invoice_path field to the Transaction entity
+        // Since we don't have that field now, we can log or handle it differently
+        console.log(`Invoice generated successfully: ${invoicePath}`);
+        
+        // Ideally, update the transaction with the invoice path
+        // savedTransaction.invoice_path = invoicePath;
+        // await this.repo.save(savedTransaction);
+            } catch (error) {
+        console.error(`Error generating invoice for transaction ${savedTransaction.transaction_id}:`, error);
+      }
+    }
+
+    return savedTransaction;
   }
 
   async findById(transaction_id: string): Promise<Transaction> {
@@ -78,8 +115,38 @@ export class TransactionsService {
     dto: UpdateTransactionDto
   ): Promise<Transaction> {
     const transaction = await this.findById(transaction_id);
+    const oldStatus = transaction.status;
+    
     Object.assign(transaction, dto);
-    return this.repo.save(transaction);
+    
+    // If updated to COMPLETED, set the completion date
+    if (dto.status === TransactionStatus.COMPLETED && oldStatus !== TransactionStatus.COMPLETED) {
+      transaction.completed_at = new Date();
+    }
+    
+    const updatedTransaction = await this.repo.save(transaction);
+    
+    // Generate invoice if the transaction changes to COMPLETED and is of payment type
+    if (oldStatus !== TransactionStatus.COMPLETED && 
+        updatedTransaction.status === TransactionStatus.COMPLETED && 
+        (updatedTransaction.type === TransactionType.PAYMENT || 
+         updatedTransaction.type === TransactionType.ESCROW_RELEASE)) {
+      try {
+        const invoicePath = await this.invoiceService.generateInvoiceForTransaction(updatedTransaction.transaction_id);
+        
+        // Save the reference to the PDF in the database
+        // For this, we would need to add an invoice_path field to the Transaction entity
+        console.log(`Invoice automatically generated upon transaction completion: ${invoicePath}`);
+        
+        // Ideally, update the transaction with the invoice path
+        // updatedTransaction.invoice_path = invoicePath;
+        // await this.repo.save(updatedTransaction);
+      } catch (error) {
+        console.error(`Error generating invoice for transaction ${updatedTransaction.transaction_id}:`, error);
+      }
+    }
+    
+    return updatedTransaction;
   }
 
   async delete(transaction_id: string): Promise<void> {

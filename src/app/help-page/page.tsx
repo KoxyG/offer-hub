@@ -1,8 +1,8 @@
-import HelpHeader from "../../pages/help-page/components/help-header"
-import HelpCategoryCards from "../../pages/help-page/components/help-category-cards"
-import HelpTopicsTabs from "@/pages/help-page/components/help-topics-taps"
-import ContactSupport from "@/pages/help-page/components/contact-support"
-import CommunityResources from "@/pages/help-page/components/community-resources"
+import HelpHeader from "../../components/help/help-header"
+import HelpCategoryCards from "../../components/help/help-category-cards"
+import HelpTopicsTabs from "@/components/help/help-topics-taps"
+import ContactSupport from "@/components/help/contact-support"
+import CommunityResources from "@/components/help/community-resources"
 export default function HelpPage() {
     return (
         <>

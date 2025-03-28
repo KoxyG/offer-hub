@@ -28,10 +28,12 @@ import { UserProfile } from "./modules/user-profiles/entity";
 import { Service } from "./modules/services/entity";
 import { ServiceCategory } from "./modules/service-categories/entity";
 import { DisputeEntity } from "./modules/disputes/disputes.entity";
+import { Webhook } from "./modules/webhooks/entity";
 
 //=======================================
 //               Modules
 //=======================================
+
 import { ActivityLogsModule } from "./modules/activity-logs/module";
 import { AuthLogsModule } from "./modules/auth-logs/module";
 import { CategoriesModule } from "./modules/categories/module";
@@ -53,6 +55,10 @@ import { AchievementsModule } from "./modules/achievements/module";
 import { ServicesModule } from "./modules/services/module";
 import { ServiceCategoriesModule } from "./modules/service-categories/module";
 import { DisputesModule } from "./modules/disputes/disputes.module";
+import { VerificationsModule } from "./modules/verification/verification.module";
+import { InvoiceModule } from './modules/invoices/module';
+import { WebhooksModule } from "./modules/webhooks/module";
+
 
 @Module({
   imports: [
@@ -61,10 +67,10 @@ import { DisputesModule } from "./modules/disputes/disputes.module";
       host:
         process.env.DATABASE_HOST ||
         (process.env.DOCKER_ENV ? "offer_hub_database" : "localhost"),
-      port: parseInt(process.env.DATABASE_PORT || "5432", 10),
-      username: process.env.DATABASE_USER || "offerhub_admin",
-      password: process.env.DATABASE_PASSWORD || "offerhub_pass",
-      database: process.env.DATABASE_NAME || "offer_hub_database",
+        port: parseInt(process.env.DATABASE_PORT || "5432", 10),
+        username: process.env.DATABASE_USER || "offerhub_admin",
+        password: process.env.DATABASE_PASSWORD || "offerhub_pass",
+        database: process.env.DATABASE_NAME || "offer_hub_database",
       entities: [
         Achievement,
         ActivityLogs,
@@ -87,6 +93,7 @@ import { DisputesModule } from "./modules/disputes/disputes.module";
         Service,
         ServiceCategory,
         DisputeEntity,
+        Webhook,
       ],
       synchronize: true,
       autoLoadEntities: true,
@@ -112,6 +119,9 @@ import { DisputesModule } from "./modules/disputes/disputes.module";
     ServicesModule,
     ServiceCategoriesModule,
     DisputesModule,
+    VerificationsModule,
+    InvoiceModule,
+    WebhooksModule,
   ],
 })
 export class AppModule {}

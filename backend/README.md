@@ -37,6 +37,7 @@ DOCKER_ENV=true
 PORT=3002
 HASURA_GRAPHQL_DATABASE_URL=postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
 HASURA_GRAPHQL_ADMIN_SECRET=offerhub_secret
+WEBHOOK_SECRET=secret//Secret webhook must be incororpored to do test local
 ```
 
 ---

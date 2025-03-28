@@ -13,6 +13,8 @@ import {
 } from "./disputes.dto";
 import { Transaction } from "../transactions/entity";
 import { User } from "../users/entity";
+import { WebhooksService } from "../webhooks/service";
+import { WebhookEvent } from '../webhooks/entity';
 
 @Injectable()
 export class DisputesService {
@@ -24,7 +26,8 @@ export class DisputesService {
     private readonly transactionRepository: Repository<Transaction>,
 
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>
+    private readonly userRepository: Repository<User>,
+    private readonly webhooksService: WebhooksService
   ) {}
 
   async createDispute(dto: CreateDisputeDto): Promise<DisputeEntity> {
@@ -90,7 +93,18 @@ export class DisputesService {
 
     dispute.updated_at = new Date();
 
+    const updatedDispute = await this.disputeRepository.save(dispute);
+    //wWbhook trigger
+    if (updatedDispute.status === DisputeStatus.RESOLVED) {
+      const webhookData = {
+        event: WebhookEvent.DISPUTE_RESOLVED,
+        data: updatedDispute, 
+      };
+  
+      await this.webhooksService.triggerWebhook(webhookData);
+    }
     return this.disputeRepository.save(dispute);
+
   }
 
   async deleteDispute(id: string): Promise<void> {
